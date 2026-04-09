@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Free Webpage</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is my webpage connected to a backend.</p>
+    <button onclick="fetchApi()">Get Backend Message</button>
+    <p id="backend"></p>
+
+    <script>
+        function fetchApi() {
+            fetch('/api')
+                .then(res => res.json())
+                .then(data => document.getElementById('backend').innerText = data.message);
+        }
+    </script>
+</body>
+</html>
