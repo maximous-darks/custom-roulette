@@ -1,20 +1,325 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Free Webpage</title>
+  <title>MaximousDarks GD Level Roulette</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #1e1e1e; color: white; text-align: center; margin-top: 50px; }
+    select, button, input { font-size: 1em; margin: 10px; padding: 5px 10px; }
+    #level-display { font-size: 2em; margin: 20px auto; padding: 20px; border: 3px solid #fff; display: inline-block; min-width: 400px; background: #333; }
+    h1 { margin-bottom: 20px; }
+    ul { list-style: none; padding: 0; margin-top: 10px; text-align: left; display: inline-block; }
+    li { padding: 3px 0; }
+  </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This is my webpage connected to a backend.</p>
-    <button onclick="fetchApi()">Get Backend Message</button>
-    <p id="backend"></p>
+<h1>MaximousdARKS GD Level Roulette</h1>
 
-    <script>
-        function fetchApi() {
-            fetch('/api')
-                .then(res => res.json())
-                .then(data => document.getElementById('backend').innerText = data.message);
-        }
-    </script>
+<label for="levelSet">Choose Set:</label>
+<select id="levelSet">
+  <option value="set1">1 - 100</option>
+  <option value="set2">101 - 200</option>
+</select>
+<br>
+<button id="startBtn">Start</button>
+<button id="resetBtn">Reset</button>
+
+<div id="level-display">Select a set and press Start!</div>
+<br>
+
+<input type="text" id="numberInput" placeholder="Type the next number..." disabled>
+<button id="submitBtn" disabled>Submit</button>
+
+<br><br>
+<h3>Completed Levels:</h3>
+<ul id="generated-list"></ul>
+
+<script>
+const levelSets = {
+    set1: [
+      "[1] Thinking Space II",
+      "[2] Flamewall",
+      "[3] Amethyst",
+      "[4] Tidal Wave",
+      "[5] ORBIT",
+      "[6] Nullscapes",
+      "[7] Quanteuse Processing",
+      "[8] BOOBAWAMBA",
+      "[9] Every End",
+      "[10] andromeda",
+      "[11] Subsuming Vortex",
+      "[12] Silent clubstep",
+      "[13] Anathema",
+      "[14] Ashley Wave Trials",
+      "[15] Avernus",
+      "[16] Acheron",
+      "[17] Spectre",
+      "[18] Menace",
+      "[19] Abyss of Darkness",
+      "[20] Defeated Circles",
+      "[21] Tunnel of Despair",
+      "[22] Kyouki",
+      "[23] Subterminal Point",
+      "[24] Slaughterhouse",
+      "[25] KOCMOC",
+      "[26] Based After Based",
+      "[27] The Lightning Rod",
+      "[28] CHIL",
+      "[29] Sakupen Circles",
+      "[30] Deimos (ItsHybrid)",
+      "[31] Eyes in the Water",
+      "[32] Voltage (ThePurgatory)",
+      "[33] KOSETSU",
+      "[34] Through The Gates",
+      "[35] Firework",
+      "[36] Silentlocked",
+      "[37] NOMAD",
+      "[38] poocubed",
+      "[39] Snowbound",
+      "[40] Saul Goodman",
+      "[41] The Salt Factory",
+      "[42] CONVULSION",
+      "[43] MINUSdry",
+      "[44] Apocalyptic Trilogy",
+      "[45] Sevvend Clubstep",
+      "[46] The Hallucination",
+      "[47] COMBUSTION",
+      "[48] Deadlier Clubstep",
+      "[49] Stellar Night",
+      "[50] Edge of Destiny",
+      "[51] Solar Flare",
+      "[52] The Catacombs",
+      "[53] LIMBO",
+      "[54] Gaggatrondra",
+      "[55] Belladonna",
+      "[56] Codependence",
+      "[57] Collapse (Nexel)",
+      "[58] Mayhem",
+      "[59] CHROMACAVE",
+      "[60] The Plunge",
+      "[61] walter white",
+      "[62] Infinite Chaos",
+      "[63] Operation Evolution",
+      "[64] Damascus",
+      "[65] Decks Dark",
+      "[66] SARYYX NEVER CLEAR",
+      "[67] The Yangire",
+      "[68] Climax",
+      "[69] Ordinary",
+      "[70] TrakineS",
+      "[71] Loops of Fury",
+      "[72] Wavterminal",
+      "[73] Sinister Silence",
+      "[74] Midnight",
+      "[75] Cimmerian Shade",
+      "[76] PSYCHOPATH",
+      "[77] arcturus",
+      "[78] Diabolic ClubStep",
+      "[79] BEELINE",
+      "[80] Sonic Wave Infinity",
+      "[81] Tartarus",
+      "[82] Coalescence",
+      "[83] Waterfall",
+      "[84] THE JET ENGINE",
+      "[85] Jigsaw",
+      "[86] The Wonder of You",
+      "[87] Delta",
+      "[88] BPATA MPAKA",
+      "[89] Natural Disaster",
+      "[90] Terminal Rampancy",
+      "[91] The Golden",
+      "[92] Oblivion",
+      "[93] Viprin UFO",
+      "[94] NETWORK (Agat3)",
+      "[95] Verdant Landscape",
+      "[96] Levigo",
+      "[97] UNKNOWN",
+      "[98] Atomic Cannon Mk III",
+      "[99] Shukketsu",
+      "[100] Checked Steam"
+    ],
+    set2: [
+      "[101] Critical Heat", 
+      "[102] WOBBLING MACHINE", 
+      "[103] Crystal Crusher", 
+      "[104] limbo but uwu ig idk", 
+      "[105] Graceful", 
+      "[106] paranoia", 
+      "[107] The Paroxysm of Rage", 
+      "[108] Blood Echo", 
+      "[109] Aerial Gleam", 
+      "[110] DISCONNECT", 
+      "[111] VOID", 
+      "[112] Starlit Stroll", 
+      "[113] Henken", 
+      "[114] Trueffet", 
+      "[115] azure blast", 
+      "[116] Kenos", 
+      "[117] Fragile", 
+      "[118] chrome hearts", 
+      "[119] Starlight Summit", 
+      "[120] Esfera", 
+      "[121] Destruction 19", 
+      "[122] Time Lapse", 
+      "[123] NEUTRA", 
+      "[124] Dark Dimension", 
+      "[125] Swing Swing", 
+      "[126] Guideless Goobering", 
+      "[127] Hard Machine", 
+      "[128] DISSONSANCE", 
+      "[129] Goober Rage Stage", 
+      "[130] Crackhead Circles", 
+      "[131] Zodiac", 
+      "[132] Lotus Flower", 
+      "[133] Scream Machine", 
+      "[134] Axinie", 
+      "[135] Judgement Knights", 
+      "[136] Widestep", 
+      "[137] Lithium", 
+      "[138] Keres", 
+      "[139] IRIS", 
+      "[140] Galeforce",
+      "[141] Cold Sweat",
+      "[142] Frost Spirit",
+      "[143] Ascent",
+      "[144] Promethean",
+      "[145] Thinking Space",
+      "[146] Dry Out Copyable 2",
+      "[147] Renevant",
+      "[148] ConClusion",
+      "[149] We Are Not The Same",
+      "[150] Trotil",
+      "[151] Disconnected Descent",
+      "[152] Instinct (Krazyman50)",
+      "[153] Sky Shredder",
+      "[154] Calculator Core",
+      "[155] shimmer (ampiltron)",
+      "[156] Crimson Planet",
+      "[157] DIRECTIONS",
+      "[158] Ringy Paracosm",
+      "[159] ATOMIC CANNON Mk II",
+      "[160] Axiom Asterism",
+      "[161] Indivine",
+      "[162] Cognition",
+      "[163] Neon Skyline",
+      "[164] CORRODERE",
+      "[165] Cosmic Cyclone",
+      "[166] qoUEO",
+      "[167] SARY NEVER CLEAR",
+      "[168] Rigel",
+      "[169] Scrubbabingo force",
+      "[170] Call Me Maybe",
+      "[171] ta1LSD0ll",
+      "[172] RUST",
+      "[173] SAND SAILOR",
+      "[174] Gloxinia",
+      "[175] Akashic Records",
+      "[176] meow hard",
+      "[177] Lucid Nightmares",
+      "[178] Cobwebs",
+      "[179] RUTHLESS",
+      "[180] Coral Cave",
+      "[181] Launchpad Labyrinth",
+      "[182] SUPERHATEMEWORLD",
+      "[183] obsession",
+      "[184] Tenkai",
+      "[185] Shardscapes",
+      "[186] Omega Interface",
+      "[187] Amalgam",
+      "[188] Sides Of My Mind",
+      "[189] Horros",
+      "[190] Ykds1479ymdppr",
+      "[191] Ragnarok",
+      "[192] me when machine gang",
+      "[193] NYUTOPIA",
+      "[194] Pandemonium (Cersia)",
+      "[195] The Art Of The Blade",
+      "[196] Descent Into Exile",
+      "[197] Deep Bass",
+      "[198] The Rupture",
+      "[199] Jupiter My Favourite",
+      "[200] Silent Club"
+    ]
+  };
+
+let currentSet = [];
+let currentIndex = 0;
+
+const display = document.getElementById('level-display');
+const input = document.getElementById('numberInput');
+const submitBtn = document.getElementById('submitBtn');
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+const generatedList = document.getElementById('generated-list');
+const levelSetSelect = document.getElementById('levelSet');
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function updateDisplay() {
+  if(currentIndex < currentSet.length){
+    display.innerText = currentSet[currentIndex];
+    input.placeholder = `${currentIndex + 1}% or more`;
+
+    // Add to generated list if new
+    if(!generatedList.children[currentIndex]){
+      const li = document.createElement('li');
+      li.innerText = currentSet[currentIndex];
+      generatedList.appendChild(li);
+    }
+  } else {
+    display.innerText = "GG my slime";
+    input.disabled = true;
+    submitBtn.disabled = true;
+  }
+}
+
+// Start button
+startBtn.addEventListener('click', () => {
+  const selectedSet = levelSetSelect.value;
+  currentSet = [...levelSets[selectedSet]];
+  shuffleArray(currentSet);
+  currentIndex = 0;
+  generatedList.innerHTML = "";
+  input.disabled = false;
+  submitBtn.disabled = false;
+  input.value = "";
+  updateDisplay();
+});
+
+// Reset button
+resetBtn.addEventListener('click', () => {
+  currentSet = [];
+  currentIndex = 0;
+  display.innerText = "Select a set and press Start!";
+  input.value = "";
+  input.disabled = true;
+  submitBtn.disabled = true;
+  generatedList.innerHTML = "";
+});
+
+// Submit button
+submitBtn.addEventListener('click', () => {
+  let val = parseInt(input.value.trim());
+  if(isNaN(val)) {
+    alert("Please type a valid number!");
+    return;
+  }
+  if(val > 100) {
+    alert("Cannot exceed 100%!");
+    return;
+  }
+  if(val >= currentIndex + 1) {
+    currentIndex = val; // advance index to typed number
+    updateDisplay();
+    input.value = "";
+  } else {
+    alert(`You must type ${currentIndex + 1}% or more!`);
+  }
+});
+</script>
 </body>
 </html>
