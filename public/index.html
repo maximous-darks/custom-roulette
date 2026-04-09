@@ -264,6 +264,10 @@ function updateDisplay() {
     display.innerText = currentSet[currentIndex];
     input.placeholder = `${currentIndex + 1}% or more`;
 
+<<<<<<< HEAD
+=======
+    // Add to generated list if new
+>>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
     if(!generatedList.children[currentIndex]){
       const li = document.createElement('li');
       li.innerText = currentSet[currentIndex];
@@ -276,6 +280,10 @@ function updateDisplay() {
   }
 }
 
+<<<<<<< HEAD
+=======
+// Start button
+>>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 startBtn.addEventListener('click', () => {
   const selectedSet = levelSetSelect.value;
   currentSet = [...levelSets[selectedSet]];
@@ -288,6 +296,10 @@ startBtn.addEventListener('click', () => {
   updateDisplay();
 });
 
+<<<<<<< HEAD
+=======
+// Reset button
+>>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 resetBtn.addEventListener('click', () => {
   currentSet = [];
   currentIndex = 0;
@@ -298,6 +310,10 @@ resetBtn.addEventListener('click', () => {
   generatedList.innerHTML = "";
 });
 
+<<<<<<< HEAD
+=======
+// Submit button
+>>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 submitBtn.addEventListener('click', () => {
   let val = parseInt(input.value.trim());
   if(isNaN(val)) {
@@ -309,7 +325,11 @@ submitBtn.addEventListener('click', () => {
     return;
   }
   if(val >= currentIndex + 1) {
+<<<<<<< HEAD
     currentIndex = val;
+=======
+    currentIndex = val; // advance index to typed number
+>>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
     updateDisplay();
     input.value = "";
   } else {
