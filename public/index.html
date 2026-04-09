@@ -366,10 +366,6 @@ function updateDisplay() {
     display.innerText = currentSet[currentIndex];
     input.placeholder = `${currentIndex + 1}% or more`;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
     if(!generatedList.children[currentIndex]){
       const li = document.createElement('li');
       li.innerText = currentSet[currentIndex];
@@ -382,10 +378,6 @@ function updateDisplay() {
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 startBtn.addEventListener('click', () => {
   const selectedSet = levelSetSelect.value;
   currentSet = [...levelSets[selectedSet]];
@@ -398,45 +390,32 @@ startBtn.addEventListener('click', () => {
   updateDisplay();
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 resetBtn.addEventListener('click', () => {
   currentSet = [];
   currentIndex = 0;
-  display.innerText = "Select a set and press Start!";
+  display.innerText = "Select a list then press start";
   input.value = "";
   input.disabled = true;
   submitBtn.disabled = true;
   generatedList.innerHTML = "";
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 submitBtn.addEventListener('click', () => {
   let val = parseInt(input.value.trim());
-  if(isNaN(val)) {
-    alert("Please type a valid number!");
+
+  if (isNaN(val)) {
+    alert("type a valid number gng");
     return;
   }
-  if(val > 100) {
-    alert("Cannot exceed 100%!");
+
+  if (val < currentIndex + 1 || val > currentSet.length) {
+    alert(`You must type ${currentIndex + 1} or more, up to ${currentSet.length}`);
     return;
   }
-  if(val >= currentIndex + 1) {
-<<<<<<< HEAD
-    currentIndex = val;
-=======
-    currentIndex = val;
->>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
-    updateDisplay();
-    input.value = "";
-  } else {
-    alert(`You must type ${currentIndex + 1}% or more!`);
-  }
+
+  currentIndex = val - 1;
+  updateDisplay();
+  input.value = "";
 });
 </script>
 </body>
