@@ -18,6 +18,7 @@
 <select id="levelSet">
   <option value="set1">1 - 100</option>
   <option value="set2">101 - 200</option>
+  <option value="set3">2018</option>
 </select>
 <br>
 <button id="startBtn">Start</button>
@@ -238,7 +239,108 @@ const levelSets = {
       "[198] The Rupture",
       "[199] Jupiter My Favourite",
       "[200] Silent Club"
-    ]
+    ],
+    set3: [
+      "[1] Bloodlust",
+      "[2] Plasma Pulse Finale",
+      "[3] Spacial Rend",
+      "[4] Gamma",
+      "[5] Sonic Wave",
+      "[6] Erebus",
+      "[7] Yatagarasu",
+      "[8] ZAPHKIEL",
+      "[9] Devil Vortex",
+      "[10] Cadrega City",
+      "[11] Step To Hell",
+      "[12] Artifical Ascent",
+      "[13] Digital Descent",
+      "[14] Stalemate Redux",
+      "[15] Factory Realm X",
+      "[16] Demonicat",
+      "[17] Killbot",
+      "[18] Glowy",
+      "[19] Bausha Vortex",
+      "[20] The Hell World",
+      "[21] Paroxysm",
+      "[22] Hatred",
+      "[23] Delta Interface",
+      "[24] Black Blizzard",
+      "[25] Quantum Processing",
+      "[26] Fabrication",
+      "[27] Sakupen Hell",
+      "[28] Asmodeus",
+      "[29] SubSonic",
+      "[30] Mystic",
+      "[31] Team Z",
+      "[32] EnvY",
+      "[33] Furious Flames",
+      "[34] Athantos",
+      "[35] Phobos",
+      "[36] Arctic Arena",
+      "[37] The Hell Zone",
+      "[38] Carnage Mode",
+      "[39] The Hell Origin",
+      "[40] ATMarbl",
+      "[41] Infernal Abyss",
+      "[42] Blade of Justice",
+      "[43] Bloodbath",
+      "[44] Betrayal of Fate",
+      "[45] Conical Depression",
+      "[46] Aurora",
+      "[47] Down Bass",
+      "[48] A Bizzare Phantasm",
+      "[49] Artificial Ideology",
+      "[50] The Hell Factory",
+      "[51] aftermath",
+      "[52] Novalis",
+      "[53] Plasma Pulse III",
+      "[54] The Hell Dignity",
+      "[55] Niflheim",
+      "[56] Red World Rebirth",
+      "[57] Audio Extraction",
+      "[58] Elite Z Rebirth",
+      "[59] Breakout",
+      "[60] Incipient",
+      "[61] Under lavaland",
+      "[62] Twisted Tranquility",
+      "[63] Destruction of God",
+      "[64] The Flawless",
+      "[65] Uprise",
+      "[66] Fexty",
+      "[67] Deception Dive",
+      "[68] Artificial Dream",
+      "[69] Panasonic",
+      "[70] Retention",
+      "[71] Allegiance",
+      "[72] Heartbeat",
+      "[73] AcropoliX",
+      "[74] Cataclysm",
+      "[75] SUBVERSIVE",
+      "[76] Killerzone",
+      "[77] Duelo Maestro",
+      "[78] CholeriX",
+      "[79] night party",
+      "[80] Underground",
+      "[81] Arcadelocked",
+      "[82] Excessive Compliment",
+      "[83] The Ultimate Phase",
+      "[84] Violently X",
+      "[85] Electrosonic",
+      "[86] Cosmorush 21",
+      "[87] Falling Up",
+      "[88] Cosmic Calamity",
+      "[89] AAAAAAAAAAAAAAAAAAAA",
+      "[90] After Catabath",
+      "[91] Photovoltaic",
+      "[92] Awakening Horus",
+      "[93] NecropoliX",
+      "[94] HyperSonic",
+      "[95] Astronomical Alchemy",
+      "[96] 8o X",
+      "[97] Matilda the Machine",
+      "[98] Final Epilogue",
+      "[99] Dark RainBow Rebirth",
+      "[100] ICE Carbon Diablo X"
   };
 
 let currentSet = [];
@@ -266,7 +368,7 @@ function updateDisplay() {
 
 <<<<<<< HEAD
 =======
-    // Add to generated list if new
+
 >>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
     if(!generatedList.children[currentIndex]){
       const li = document.createElement('li');
@@ -282,7 +384,7 @@ function updateDisplay() {
 
 <<<<<<< HEAD
 =======
-// Start button
+
 >>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 startBtn.addEventListener('click', () => {
   const selectedSet = levelSetSelect.value;
@@ -298,7 +400,7 @@ startBtn.addEventListener('click', () => {
 
 <<<<<<< HEAD
 =======
-// Reset button
+
 >>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 resetBtn.addEventListener('click', () => {
   currentSet = [];
@@ -312,7 +414,7 @@ resetBtn.addEventListener('click', () => {
 
 <<<<<<< HEAD
 =======
-// Submit button
+
 >>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
 submitBtn.addEventListener('click', () => {
   let val = parseInt(input.value.trim());
@@ -328,7 +430,7 @@ submitBtn.addEventListener('click', () => {
 <<<<<<< HEAD
     currentIndex = val;
 =======
-    currentIndex = val; // advance index to typed number
+    currentIndex = val;
 >>>>>>> 1fb0384 (Update GD Level Roulette HTML and script)
     updateDisplay();
     input.value = "";
